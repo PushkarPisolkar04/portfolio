@@ -1,0 +1,92 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Personal files
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+resume.pdf
+resume-*.pdf
+**/resume.pdf
+**/resume-*.pdf
+
+# Personal information files
+**/contact.txt
+**/about.txt
+**/education.txt
+**/achievements.txt
+**/certifications.txt
+**/projects.txt
+**/skills.txt
+**/languages.txt
+**/*.txt
+
+# Cache
+.cache/
+.temp/
+.tmp/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# System files
+desktop.ini
+$RECYCLE.BIN/
+
+# Sound files
+*.mp3
+*.wav
+*.ogg
+
+# Images
+avatar.jpg
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+
+# Personal data
+**/personal/
+**/private/
+**/sensitive/
+**/confidential/ 

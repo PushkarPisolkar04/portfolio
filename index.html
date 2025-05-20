@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pushkar Pisolkar - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <img src="assets/images/kali-logo.png" alt="Kali Linux Logo" class="kali-logo">
+                <h1>Kali Linux</h1>
+            </div>
+            <div class="boot-text">
+                <div class="boot-line">[ OK ] Starting system services...</div>
+                <div class="boot-line">[ OK ] Loading kernel modules...</div>
+                <div class="boot-line">[ OK ] Initializing network...</div>
+                <div class="boot-line">[ OK ] Starting desktop environment...</div>
+                <div class="boot-line">[ OK ] Loading user profile...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Desktop (initially hidden) -->
+    <div id="desktop" class="desktop" style="display: none;">
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <div class="desktop-icon" onclick="openWindow('terminal')">
+                <i class="fas fa-terminal" style="color: #00ff00;"></i>
+                <span>Terminal</span>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('files')">
+                <i class="fas fa-folder-open" style="color: #ffd700;"></i>
+                <span>Files</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('projects')">
+                <i class="fas fa-code" style="color: #ff6b6b;"></i>
+                <span>Projects</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('skills')">
+                <i class="fas fa-brain" style="color: #4dabf7;"></i>
+                <span>Skills</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('contact')">
+                <i class="fas fa-envelope" style="color: #ff922b;"></i>
+                <span>Contact</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('resume')">
+                <i class="fas fa-file-alt" style="color: #51cf66;"></i>
+                <span>Resume</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('github')">
+                <i class="fab fa-github" style="color: #e64980;"></i>
+                <span>GitHub</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('linkedin')">
+                <i class="fab fa-linkedin" style="color: #339af0;"></i>
+                <span>LinkedIn</span>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('monitor')">
+                <i class="fas fa-chart-line" style="color: #00ff00;"></i>
+                <span>Monitor</span>
+            </div>
+            <div class="desktop-icon" onclick="openWindow('settings')">
+                <i class="fas fa-cog" style="color: #339af0;"></i>
+                <span>Settings</span>
+            </div>
+            <div class="desktop-icon" onclick="executeCommand('about')">
+                <i class="fas fa-user" style="color: #ff6b6b;"></i>
+                <span>About Me</span>
+            </div>
+        </div>
+
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="taskbar-left">
+                <div class="taskbar-item" onclick="toggleStartMenu()">
+                    <img src="assets/images/kali-logo.png" alt="Kali Linux Logo" class="taskbar-logo">
+                    <span>Start</span>
+                </div>
+                <div class="taskbar-item" onclick="openWindow('terminal')">
+                    <i class="fas fa-terminal" style="color: #00ff00;"></i>
+                </div>
+                <div class="taskbar-item" onclick="openWindow('files')">
+                    <i class="fas fa-folder-open" style="color: #ffd700;"></i>
+                </div>
+            </div>
+            <div class="taskbar-center">
+                <!-- Active windows will appear here -->
+            </div>
+            <div class="taskbar-right">
+                <div class="taskbar-item">
+                    <i class="fas fa-wifi" style="color: #4dabf7;"></i>
+                </div>
+                <div class="taskbar-item">
+                    <i class="fas fa-volume-up" style="color: #ff922b;"></i>
+                </div>
+                <div class="taskbar-item">
+                    <i class="fas fa-battery-full" style="color: #51cf66;"></i>
+                </div>
+                <div class="taskbar-item clock">
+                    <i class="fas fa-clock" style="color: #e64980;"></i>
+                    <span>00:00:00</span>
+                </div>
+                <div class="taskbar-item" onclick="showShutdownDialog()">
+                    <i class="fas fa-power-off" style="color: #ff6b6b;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Menu -->
+        <div class="start-menu">
+            <div class="start-menu-header">
+                <img src="assets/avatar.jpg" alt="User Avatar" style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--kali-purple);">
+                <div>
+                    <h3>pushkar@kali</h3>
+                    <p>Cybersecurity Intern</p>
+                </div>
+            </div>
+            <div class="start-menu-items">
+                <div class="start-menu-item" onclick="openWindow('terminal')">
+                    <i class="fas fa-terminal" style="color: #00ff00;"></i>
+                    <span>Terminal</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('files')">
+                    <i class="fas fa-folder-open" style="color: #ffd700;"></i>
+                    <span>Files</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('projects')">
+                    <i class="fas fa-code" style="color: #ff6b6b;"></i>
+                    <span>Projects</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('skills')">
+                    <i class="fas fa-brain" style="color: #4dabf7;"></i>
+                    <span>Skills</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('contact')">
+                    <i class="fas fa-envelope" style="color: #ff922b;"></i>
+                    <span>Contact</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('monitor')">
+                    <i class="fas fa-chart-line" style="color: #00ff00;"></i>
+                    <span>System Monitor</span>
+                </div>
+                <div class="start-menu-item" onclick="openWindow('settings')">
+                    <i class="fas fa-cog" style="color: #339af0;"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Window -->
+        <div id="terminal-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-terminal"></i>
+                    <span>Terminal</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('terminal')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('terminal')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('terminal')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="terminal-line">Welcome to Kali Linux Portfolio</div>
+                <div class="terminal-line">Type 'help' for available commands</div>
+                <div id="terminal-output"></div>
+                <div class="terminal-input">
+                    <span class="prompt">root@kali:~#</span>
+                    <input type="text" id="terminal-input" autofocus>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Explorer -->
+        <div id="files-window" class="file-explorer">
+            <div class="explorer-header">
+                <div class="terminal-title">
+                    <i class="fas fa-folder"></i>
+                    <span>Files</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('files')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('files')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('files')"></div>
+                </div>
+            </div>
+            <div class="explorer-content">
+                <div class="explorer-sidebar">
+                    <div class="sidebar-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Documents</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-code"></i>
+                        <span>Projects</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <i class="fas fa-download"></i>
+                        <span>Downloads</span>
+                    </div>
+                </div>
+                <div class="explorer-main">
+                    <div class="file-grid">
+                        <div class="file-item" onclick="openFile('resume.pdf')">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>resume.pdf</span>
+                        </div>
+                        <div class="file-item" onclick="openFile('projects.zip')">
+                            <i class="fas fa-file-archive"></i>
+                            <span>projects.zip</span>
+                        </div>
+                        <div class="file-item" onclick="openFile('skills.txt')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>skills.txt</span>
+                        </div>
+                        <div class="file-item" onclick="openFile('contact.txt')">
+                            <i class="fas fa-file-alt"></i>
+                            <span>contact.txt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shutdown Dialog -->
+        <div class="shutdown-dialog">
+            <h3>System Shutdown</h3>
+            <div class="shutdown-options">
+                <button class="shutdown-option" onclick="triggerMatrixRain()">Shutdown</button>
+                <button class="shutdown-option" onclick="hideShutdownDialog()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Matrix Rain Effect -->
+        <canvas class="matrix-rain"></canvas>
+
+        <!-- Notifications -->
+        <div class="notifications"></div>
+
+        <!-- System Monitor Window -->
+        <div id="monitor-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-chart-line" style="color: #00ff00;"></i>
+                    <span>System Monitor</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('monitor')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('monitor')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('monitor')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="monitor-grid">
+                    <div class="monitor-item">
+                        <h3>CPU Usage</h3>
+                        <div class="progress-bar">
+                            <div class="progress" id="cpu-progress"></div>
+                        </div>
+                        <span id="cpu-text">0%</span>
+                    </div>
+                    <div class="monitor-item">
+                        <h3>Memory Usage</h3>
+                        <div class="progress-bar">
+                            <div class="progress" id="ram-progress"></div>
+                        </div>
+                        <span id="ram-text">0%</span>
+                    </div>
+                    <div class="monitor-item">
+                        <h3>Network Activity</h3>
+                        <div class="network-stats">
+                            <div class="stat">
+                                <i class="fas fa-arrow-up" style="color: #00ff00;"></i>
+                                <span id="upload-speed">0 KB/s</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-arrow-down" style="color: #ff6b6b;"></i>
+                                <span id="download-speed">0 KB/s</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monitor-item">
+                        <h3>System Info</h3>
+                        <div class="system-info">
+                            <p>OS: Kali Linux Portfolio</p>
+                            <p>Kernel: 5.15.0-kali3-amd64</p>
+                            <p>Uptime: <span id="uptime">0:00:00</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Window -->
+        <div id="settings-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-cog" style="color: #339af0;"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('settings')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('settings')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('settings')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="settings-grid">
+                    <div class="settings-section">
+                        <h3>Theme</h3>
+                        <div class="theme-options">
+                            <div class="theme-option" onclick="changeTheme('kali')">
+                                <div class="theme-preview kali-theme"></div>
+                                <span>Kali Dark</span>
+                            </div>
+                            <div class="theme-option" onclick="changeTheme('matrix')">
+                                <div class="theme-preview matrix-theme"></div>
+                                <span>Matrix</span>
+                            </div>
+                            <div class="theme-option" onclick="changeTheme('cyber')">
+                                <div class="theme-preview cyber-theme"></div>
+                                <span>Cyber</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Terminal</h3>
+                        <div class="setting-item">
+                            <label>Font Size</label>
+                            <input type="range" min="12" max="20" value="14" onchange="changeFontSize(this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Cursor Style</label>
+                            <select onchange="changeCursorStyle(this.value)">
+                                <option value="block">Block</option>
+                                <option value="underline">Underline</option>
+                                <option value="bar">Bar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>Effects</h3>
+                        <div class="setting-item">
+                            <label>Matrix Rain</label>
+                            <input type="checkbox" onchange="toggleMatrixRain(this.checked)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Window Animations</label>
+                            <input type="checkbox" checked onchange="toggleAnimations(this.checked)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form Window -->
+        <div id="contact-form-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-envelope" style="color: #ff922b;"></i>
+                    <span>Contact Me</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('contact-form')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('contact-form')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('contact-form')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
