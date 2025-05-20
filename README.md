@@ -4,7 +4,8 @@ A terminal-themed portfolio website inspired by Kali Linux, featuring a fully in
 
 ## Live Demo
 
-[View Live Portfolio](https://pushkarpisolkar04.github.io/portfolio)
+- [GitHub Pages](https://pushkarpisolkar04.github.io/portfolio)
+- [Vercel](https://portfolio-pushkarpisolkar04.vercel.app)
 
 ## Features
 
