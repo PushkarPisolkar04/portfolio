@@ -53,7 +53,7 @@
 
         <!-- Desktop Icons -->
         <div class="desktop-icons">
-            <div class="desktop-icon" onclick="openFile('about.txt')">
+            <div class="desktop-icon" onclick="openWindow('about')">
                 <i class="fas fa-user" style="color: #ff6b35;"></i>
                 <span>About Me</span>
             </div>
@@ -81,11 +81,11 @@
                 <i class="fas fa-folder-open" style="color: #ffd700;"></i>
                 <span>Files</span>
             </div>
-            <div class="desktop-icon" onclick="openFile('github.txt')">
+            <div class="desktop-icon" onclick="window.open('https://github.com/PushkarPisolkar04', '_blank')">
                 <i class="fab fa-github" style="color: #8b5cf6;"></i>
                 <span>GitHub</span>
             </div>
-            <div class="desktop-icon" onclick="openFile('linkedin.txt')">
+            <div class="desktop-icon" onclick="window.open('https://linkedin.com/in/pushkar-pisolkar', '_blank')">
                 <i class="fab fa-linkedin" style="color: #3b82f6;"></i>
                 <span>LinkedIn</span>
             </div>
@@ -131,8 +131,8 @@
         <!-- Start Menu -->
         <div class="start-menu">
             <div class="start-menu-header">
-                <img src="assets/avatar.jpg" alt="User Avatar" style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--kali-purple);">
-                <div>
+                <img src="assets/avatar.jpg" alt="User Avatar" style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--kali-purple); cursor: pointer;" onclick="openWindow('about')">
+                <div onclick="openWindow('about')" style="cursor: pointer;">
                     <h3>pushkar@kali</h3>
                     <p>Final Year Computer Engineering Student</p>
                 </div>
@@ -158,10 +158,7 @@
                     <i class="fas fa-envelope" style="color: var(--kali-pink);"></i>
                     <span>Contact</span>
                 </div>
-                <div class="start-menu-item" onclick="openWindow('monitor')">
-                    <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
-                    <span>System Monitor</span>
-                </div>
+
 
             </div>
         </div>
@@ -264,121 +261,9 @@
         <!-- Notifications -->
         <div class="notifications"></div>
 
-        <!-- System Monitor Window -->
-        <div id="monitor-window" class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-title">
-                    <i class="fas fa-chart-line" style="color: #00ff00;"></i>
-                    <span>System Monitor</span>
-                </div>
-                <div class="terminal-controls">
-                    <div class="terminal-control minimize" onclick="minimizeWindow('monitor')"></div>
-                    <div class="terminal-control maximize" onclick="maximizeWindow('monitor')"></div>
-                    <div class="terminal-control close" onclick="closeWindow('monitor')"></div>
-                </div>
-            </div>
-            <div class="terminal-content">
-                <div class="monitor-grid">
-                    <div class="monitor-item">
-                        <h3>CPU Usage</h3>
-                        <div class="progress-bar">
-                            <div class="progress" id="cpu-progress"></div>
-                        </div>
-                        <span id="cpu-text">0%</span>
-                    </div>
-                    <div class="monitor-item">
-                        <h3>Memory Usage</h3>
-                        <div class="progress-bar">
-                            <div class="progress" id="ram-progress"></div>
-                        </div>
-                        <span id="ram-text">0%</span>
-                    </div>
-                    <div class="monitor-item">
-                        <h3>Network Activity</h3>
-                        <div class="network-stats">
-                            <div class="stat">
-                                <i class="fas fa-arrow-up" style="color: #00ff00;"></i>
-                                <span id="upload-speed">0 KB/s</span>
-                            </div>
-                            <div class="stat">
-                                <i class="fas fa-arrow-down" style="color: #ff6b6b;"></i>
-                                <span id="download-speed">0 KB/s</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="monitor-item">
-                        <h3>System Info</h3>
-                        <div class="system-info">
-                            <p>OS: Kali Linux Portfolio</p>
-                            <p>Kernel: 5.15.0-kali3-amd64</p>
-                            <p>Uptime: <span id="uptime">0:00:00</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Settings Window -->
-        <div id="settings-window" class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-title">
-                    <i class="fas fa-cog" style="color: #339af0;"></i>
-                    <span>Settings</span>
-                </div>
-                <div class="terminal-controls">
-                    <div class="terminal-control minimize" onclick="minimizeWindow('settings')"></div>
-                    <div class="terminal-control maximize" onclick="maximizeWindow('settings')"></div>
-                    <div class="terminal-control close" onclick="closeWindow('settings')"></div>
-                </div>
-            </div>
-            <div class="terminal-content">
-                <div class="settings-grid">
-                    <div class="settings-section">
-                        <h3>Theme</h3>
-                        <div class="theme-options">
-                            <div class="theme-option" onclick="changeTheme('kali')">
-                                <div class="theme-preview kali-theme"></div>
-                                <span>Kali Dark</span>
-                            </div>
-                            <div class="theme-option" onclick="changeTheme('matrix')">
-                                <div class="theme-preview matrix-theme"></div>
-                                <span>Matrix</span>
-                            </div>
-                            <div class="theme-option" onclick="changeTheme('cyber')">
-                                <div class="theme-preview cyber-theme"></div>
-                                <span>Cyber</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="settings-section">
-                        <h3>Terminal</h3>
-                        <div class="setting-item">
-                            <label>Font Size</label>
-                            <input type="range" min="12" max="20" value="14" onchange="changeFontSize(this.value)">
-                        </div>
-                        <div class="setting-item">
-                            <label>Cursor Style</label>
-                            <select onchange="changeCursorStyle(this.value)">
-                                <option value="block">Block</option>
-                                <option value="underline">Underline</option>
-                                <option value="bar">Bar</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="settings-section">
-                        <h3>Effects</h3>
-                        <div class="setting-item">
-                            <label>Matrix Rain</label>
-                            <input type="checkbox" onchange="toggleMatrixRain(this.checked)">
-                        </div>
-                        <div class="setting-item">
-                            <label>Window Animations</label>
-                            <input type="checkbox" checked onchange="toggleAnimations(this.checked)">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
 
         <!-- Projects Window -->
         <div id="projects-window" class="terminal-window">
@@ -420,6 +305,126 @@
             </div>
         </div>
 
+        <!-- About Me Window -->
+        <div id="about-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-user" style="color: #ff6b35;"></i>
+                    <span>About Me</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('about')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('about')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('about')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="about-content">
+                    <!-- About Me content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Window -->
+        <div id="experience-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-briefcase" style="color: #10b981;"></i>
+                    <span>Experience</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('experience')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('experience')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('experience')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="experience-content">
+                    <!-- Experience content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Window -->
+        <div id="education-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-graduation-cap" style="color: #06b6d4;"></i>
+                    <span>Education</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('education')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('education')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('education')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="education-content">
+                    <!-- Education content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications Window -->
+        <div id="certifications-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-certificate" style="color: #fbbf24;"></i>
+                    <span>Certifications</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('certifications')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('certifications')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('certifications')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="certifications-content">
+                    <!-- Certifications content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Window -->
+        <div id="achievements-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-trophy" style="color: #ff6b35;"></i>
+                    <span>Achievements</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('achievements')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('achievements')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('achievements')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="achievements-content">
+                    <!-- Achievements content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Languages Window -->
+        <div id="languages-window" class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <i class="fas fa-language" style="color: #ec4899;"></i>
+                    <span>Languages</span>
+                </div>
+                <div class="terminal-controls">
+                    <div class="terminal-control minimize" onclick="minimizeWindow('languages')"></div>
+                    <div class="terminal-control maximize" onclick="maximizeWindow('languages')"></div>
+                    <div class="terminal-control close" onclick="closeWindow('languages')"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="languages-content">
+                    <!-- Languages content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
         <!-- Contact Form Window -->
         <div id="contact-form-window" class="terminal-window">
             <div class="terminal-header">
@@ -441,19 +446,19 @@
                     <div class="contact-methods">
                         <div class="contact-method">
                             <i class="fas fa-envelope"></i>
-                            <span>Email: pushkarppisolkar@gmail.com</span>
+                            <a href="mailto:pushkarppisolkar@gmail.com" class="contact-link">Email: pushkarppisolkar@gmail.com</a>
                         </div>
                         <div class="contact-method">
                             <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn: linkedin.com/in/pushkar-pisolkar</span>
+                            <a href="https://linkedin.com/in/pushkar-pisolkar" target="_blank" class="contact-link">LinkedIn: linkedin.com/in/pushkar-pisolkar</a>
                         </div>
                         <div class="contact-method">
                             <i class="fab fa-github"></i>
-                            <span>GitHub: github.com/PushkarPisolkar04</span>
+                            <a href="https://github.com/PushkarPisolkar04" target="_blank" class="contact-link">GitHub: github.com/PushkarPisolkar04</a>
                         </div>
                         <div class="contact-method">
                             <i class="fas fa-globe"></i>
-                            <span>Portfolio: whois-pushkar.vercel.app</span>
+                            <a href="https://whois-pushkar.vercel.app" target="_blank" class="contact-link">Portfolio: whois-pushkar.vercel.app</a>
                         </div>
                     </div>
                 </div>

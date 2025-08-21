@@ -162,14 +162,8 @@ LinkedIn: ${portfolioData.personal.linkedin}`;
     },
 
     about: () => {
-        return `About Me:
-${portfolioData.about.summary}
-
-Key Strengths:
-${portfolioData.about.strengths.map(strength => `• ${strength}`).join('\n')}
-
-Interests:
-${portfolioData.about.interests.map(interest => `• ${interest}`).join('\n')}`;
+        openWindow('about');
+        return `Opening About Me window...`;
     },
 
     education: () => {
@@ -548,43 +542,35 @@ function showFileCategory(category) {
             <i class="fas fa-terminal" style="color: var(--kali-green);"></i>
             <span>Terminal</span>
         </div>
-        <div class="file-item" onclick="openWindow('monitor')">
-            <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
-            <span>Monitor</span>
-        </div>
-        <div class="file-item" onclick="openWindow('settings')">
-            <i class="fas fa-cog" style="color: var(--kali-blue);"></i>
-            <span>Settings</span>
-        </div>
-        <div class="file-item" onclick="openFile('about.txt')">
+        <div class="file-item" onclick="openWindow('about')">
             <i class="fas fa-user" style="color: var(--kali-orange);"></i>
             <span>About Me</span>
         </div>
-        <div class="file-item" onclick="openFile('experience.txt')">
+        <div class="file-item" onclick="openWindow('experience')">
             <i class="fas fa-briefcase" style="color: var(--kali-purple);"></i>
             <span>Experience</span>
         </div>
-        <div class="file-item" onclick="openFile('education.txt')">
+        <div class="file-item" onclick="openWindow('education')">
             <i class="fas fa-graduation-cap" style="color: var(--kali-cyan);"></i>
             <span>Education</span>
         </div>
-        <div class="file-item" onclick="openFile('certifications.txt')">
+        <div class="file-item" onclick="openWindow('certifications')">
             <i class="fas fa-certificate" style="color: var(--kali-yellow);"></i>
             <span>Certifications</span>
         </div>
-        <div class="file-item" onclick="openFile('achievements.txt')">
+        <div class="file-item" onclick="openWindow('achievements')">
             <i class="fas fa-trophy" style="color: var(--kali-orange);"></i>
             <span>Achievements</span>
         </div>
-        <div class="file-item" onclick="openFile('languages.txt')">
+        <div class="file-item" onclick="openWindow('languages')">
             <i class="fas fa-language" style="color: var(--kali-pink);"></i>
             <span>Languages</span>
         </div>
-        <div class="file-item" onclick="openFile('github.txt')">
+        <div class="file-item" onclick="window.open('${portfolioData.personal.github}', '_blank')">
             <i class="fab fa-github" style="color: var(--kali-purple);"></i>
             <span>GitHub</span>
         </div>
-        <div class="file-item" onclick="openFile('linkedin.txt')">
+        <div class="file-item" onclick="window.open('${portfolioData.personal.linkedin}', '_blank')">
             <i class="fab fa-linkedin" style="color: var(--kali-blue);"></i>
             <span>LinkedIn</span>
         </div>
@@ -596,41 +582,41 @@ function showFileCategory(category) {
             <span>Resume</span>
             <small class="file-info">PDF</small>
         </div>
-        <div class="file-item" onclick="openFile('about.txt')">
+        <div class="file-item" onclick="openWindow('about')">
             <i class="fas fa-user" style="color: var(--kali-orange);"></i>
             <span>About Me</span>
         </div>
-        <div class="file-item" onclick="openFile('languages.txt')">
+        <div class="file-item" onclick="openWindow('languages')">
             <i class="fas fa-language" style="color: var(--kali-pink);"></i>
             <span>Languages</span>
         </div>
     `;
     
     const professionalFiles = `
-        <div class="file-item" onclick="openFile('experience.txt')">
+        <div class="file-item" onclick="openWindow('experience')">
             <i class="fas fa-briefcase" style="color: var(--kali-purple);"></i>
             <span>Experience</span>
         </div>
-        <div class="file-item" onclick="openFile('education.txt')">
+        <div class="file-item" onclick="openWindow('education')">
             <i class="fas fa-graduation-cap" style="color: var(--kali-cyan);"></i>
             <span>Education</span>
         </div>
-        <div class="file-item" onclick="openFile('certifications.txt')">
+        <div class="file-item" onclick="openWindow('certifications')">
             <i class="fas fa-certificate" style="color: var(--kali-yellow);"></i>
             <span>Certifications</span>
         </div>
-        <div class="file-item" onclick="openFile('achievements.txt')">
+        <div class="file-item" onclick="openWindow('achievements')">
             <i class="fas fa-trophy" style="color: var(--kali-orange);"></i>
             <span>Achievements</span>
         </div>
     `;
     
     const socialFiles = `
-        <div class="file-item" onclick="openFile('github.txt')">
+        <div class="file-item" onclick="window.open('${portfolioData.personal.github}', '_blank')">
             <i class="fab fa-github" style="color: var(--kali-purple);"></i>
             <span>GitHub</span>
         </div>
-        <div class="file-item" onclick="openFile('linkedin.txt')">
+        <div class="file-item" onclick="window.open('${portfolioData.personal.linkedin}', '_blank')">
             <i class="fab fa-linkedin" style="color: var(--kali-blue);"></i>
             <span>LinkedIn</span>
         </div>
@@ -652,14 +638,6 @@ function showFileCategory(category) {
         <div class="file-item" onclick="openWindow('terminal')">
             <i class="fas fa-terminal" style="color: var(--kali-green);"></i>
             <span>Terminal</span>
-        </div>
-        <div class="file-item" onclick="openWindow('monitor')">
-            <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
-            <span>Monitor</span>
-        </div>
-        <div class="file-item" onclick="openWindow('settings')">
-            <i class="fas fa-cog" style="color: var(--kali-blue);"></i>
-            <span>Settings</span>
         </div>
     `;
     
@@ -695,6 +673,18 @@ function openWindow(windowId) {
             populateProjectsWindow();
         } else if (windowId === 'skills') {
             populateSkillsWindow();
+        } else if (windowId === 'about') {
+            populateAboutWindow();
+        } else if (windowId === 'experience') {
+            populateExperienceWindow();
+        } else if (windowId === 'education') {
+            populateEducationWindow();
+        } else if (windowId === 'certifications') {
+            populateCertificationsWindow();
+        } else if (windowId === 'achievements') {
+            populateAchievementsWindow();
+        } else if (windowId === 'languages') {
+            populateLanguagesWindow();
         }
         
         // Add to taskbar
@@ -777,8 +767,9 @@ function getWindowIcon(windowId) {
         files: 'fas fa-folder',
         projects: 'fas fa-code',
         skills: 'fas fa-tools',
+        about: 'fas fa-user',
         contact: 'fas fa-envelope',
-        settings: 'fas fa-cog'
+
     };
     return icons[windowId] || 'fas fa-window-maximize';
 }
@@ -1150,83 +1141,9 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// System Monitor functionality
-function updateSystemMonitor() {
-    const cpuUsage = Math.floor(Math.random() * 100);
-    document.getElementById('cpu-progress').style.width = `${cpuUsage}%`;
-    document.getElementById('cpu-text').textContent = `${cpuUsage}%`;
-
-    const ramUsage = Math.floor(Math.random() * 100);
-    document.getElementById('ram-progress').style.width = `${ramUsage}%`;
-    document.getElementById('ram-text').textContent = `${ramUsage}%`;
-
-    const uploadSpeed = Math.floor(Math.random() * 1000);
-    const downloadSpeed = Math.floor(Math.random() * 1000);
-    document.getElementById('upload-speed').textContent = `${uploadSpeed} KB/s`;
-    document.getElementById('download-speed').textContent = `${downloadSpeed} KB/s`;
-
-    const uptimeElement = document.getElementById('uptime');
-    if (uptimeElement) {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const seconds = now.getSeconds().toString().padStart(2, '0');
-        uptimeElement.textContent = `${hours}:${minutes}:${seconds}`;
-    }
-}
-
-// Update system monitor every second
-setInterval(updateSystemMonitor, 1000);
-
-// Settings functionality
-function changeTheme(theme) {
-    const root = document.documentElement;
-    switch(theme) {
-        case 'matrix':
-            root.style.setProperty('--kali-purple', '#00ff00');
-            root.style.setProperty('--kali-dark', '#000000');
-            root.style.setProperty('--kali-darker', '#000000');
-            break;
-        case 'cyber':
-            root.style.setProperty('--kali-purple', '#00ffff');
-            root.style.setProperty('--kali-dark', '#1a1a1a');
-            root.style.setProperty('--kali-darker', '#0a0a0a');
-            break;
-        default: // kali
-            root.style.setProperty('--kali-purple', '#557C93');
-            root.style.setProperty('--kali-dark', '#1a1a1a');
-            root.style.setProperty('--kali-darker', '#0a0a0a');
-    }
-    showNotification(`Theme changed to ${theme}`);
-}
-
-function changeFontSize(size) {
-    document.documentElement.style.setProperty('--base-font-size', `${size}px`);
-    showNotification(`Font size changed to ${size}px`);
-}
-
-function changeCursorStyle(style) {
-    const terminalInput = document.getElementById('terminal-input');
-    switch(style) {
-        case 'block':
-            terminalInput.style.caretShape = 'block';
-            break;
-        case 'underline':
-            terminalInput.style.caretShape = 'underline';
-            break;
-        case 'bar':
-            terminalInput.style.caretShape = 'bar';
-            break;
-    }
-    showNotification(`Cursor style changed to ${style}`);
-}
 
 
 
-function toggleAnimations(enabled) {
-    document.body.style.setProperty('--enable-animations', enabled ? '1' : '0');
-    showNotification(`Animations ${enabled ? 'enabled' : 'disabled'}`);
-}
 
 // Add new window types
 const windowTypes = {
@@ -1246,17 +1163,29 @@ const windowTypes = {
         icon: 'fas fa-tools',
         color: '#4dabf7'
     },
+    experience: {
+        icon: 'fas fa-briefcase',
+        color: '#10b981'
+    },
+    education: {
+        icon: 'fas fa-graduation-cap',
+        color: '#06b6d4'
+    },
+    certifications: {
+        icon: 'fas fa-certificate',
+        color: '#fbbf24'
+    },
+    achievements: {
+        icon: 'fas fa-trophy',
+        color: '#ff6b35'
+    },
+    languages: {
+        icon: 'fas fa-language',
+        color: '#ec4899'
+    },
     contact: {
         icon: 'fas fa-envelope',
         color: '#ff922b'
-    },
-    monitor: {
-        icon: 'fas fa-chart-line',
-        color: '#00ff00'
-    },
-    settings: {
-        icon: 'fas fa-cog',
-        color: '#339af0'
     }
 };
 
@@ -1376,43 +1305,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 <i class="fas fa-terminal" style="color: var(--kali-green);"></i>
                 <span>Terminal</span>
             </div>
-            <div class="file-item" onclick="openWindow('monitor')">
-                <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
-                <span>Monitor</span>
-            </div>
-            <div class="file-item" onclick="openWindow('settings')">
-                <i class="fas fa-cog" style="color: var(--kali-blue);"></i>
-                <span>Settings</span>
-            </div>
-            <div class="file-item" onclick="openFile('about.txt')">
+            <div class="file-item" onclick="openWindow('about')">
                 <i class="fas fa-user" style="color: var(--kali-orange);"></i>
                 <span>About Me</span>
             </div>
-            <div class="file-item" onclick="openFile('experience.txt')">
+            <div class="file-item" onclick="openWindow('experience')">
                 <i class="fas fa-briefcase" style="color: var(--kali-purple);"></i>
                 <span>Experience</span>
             </div>
-            <div class="file-item" onclick="openFile('education.txt')">
+            <div class="file-item" onclick="openWindow('education')">
                 <i class="fas fa-graduation-cap" style="color: var(--kali-cyan);"></i>
                 <span>Education</span>
             </div>
-            <div class="file-item" onclick="openFile('certifications.txt')">
+            <div class="file-item" onclick="openWindow('certifications')">
                 <i class="fas fa-certificate" style="color: var(--kali-yellow);"></i>
                 <span>Certifications</span>
             </div>
-            <div class="file-item" onclick="openFile('achievements.txt')">
+            <div class="file-item" onclick="openWindow('achievements')">
                 <i class="fas fa-trophy" style="color: var(--kali-orange);"></i>
                 <span>Achievements</span>
             </div>
-            <div class="file-item" onclick="openFile('languages.txt')">
+            <div class="file-item" onclick="openWindow('languages')">
                 <i class="fas fa-language" style="color: var(--kali-pink);"></i>
                 <span>Languages</span>
             </div>
-            <div class="file-item" onclick="openFile('github.txt')">
+            <div class="file-item" onclick="window.open('${portfolioData.personal.github}', '_blank')">
                 <i class="fab fa-github" style="color: var(--kali-purple);"></i>
                 <span>GitHub</span>
             </div>
-            <div class="file-item" onclick="openFile('linkedin.txt')">
+            <div class="file-item" onclick="window.open('${portfolioData.personal.linkedin}', '_blank')">
                 <i class="fab fa-linkedin" style="color: var(--kali-blue);"></i>
                 <span>LinkedIn</span>
             </div>
@@ -1520,6 +1441,217 @@ function populateSkillsWindow() {
             </div>
         </div>
     `).join('');
+}
+
+// Function to populate about window
+function populateAboutWindow() {
+    const aboutContent = document.querySelector('.about-content');
+    if (!aboutContent) return;
+
+    aboutContent.innerHTML = `
+        <div class="about-section">
+            <div class="about-header">
+                <div class="about-avatar">
+                    <img src="assets/avatar.jpg" alt="Pushkar Pisolkar">
+                </div>
+                <div class="about-info">
+                    <h2>${portfolioData.personal.name}</h2>
+                    <p class="about-role">${portfolioData.personal.role}</p>
+                    <p class="about-focus">Focus: ${portfolioData.personal.focus}</p>
+                    <p class="about-location">📍 ${portfolioData.personal.location}</p>
+                </div>
+            </div>
+            
+            <div class="about-summary">
+                <h3>About Me</h3>
+                <p>${portfolioData.about.summary}</p>
+            </div>
+            
+            <div class="about-details">
+                <div class="about-column">
+                    <div class="about-card">
+                        <h3><i class="fas fa-star"></i> Key Strengths</h3>
+                        <ul>
+                            ${portfolioData.about.strengths.map(strength => `<li>${strength}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3><i class="fas fa-heart"></i> Interests</h3>
+                        <ul>
+                            ${portfolioData.about.interests.map(interest => `<li>${interest}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="about-column">
+                    <div class="about-card">
+                        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <div class="education-item">
+                            <h4>${portfolioData.education[0].degree}</h4>
+                            <p>${portfolioData.education[0].institution}</p>
+                            <p>${portfolioData.education[0].duration} | CGPA: ${portfolioData.education[0].cgpa}/10.0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card">
+                        <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                        <ul>
+                            <li>Gold Medalist (Zonal) - Aavishkar State-level Innovation Competition</li>
+                            <li>Semi-Finalist - Flipkart Grid 6.0 National Hackathon</li>
+                            <li>100/100 in CBSE Class 10 Mathematics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-contact">
+                <h3><i class="fas fa-envelope"></i> Get In Touch</h3>
+                <div class="contact-links">
+                    <a href="mailto:${portfolioData.personal.email}" class="contact-link">
+                        <i class="fas fa-envelope"></i> ${portfolioData.personal.email}
+                    </a>
+                    <a href="${portfolioData.personal.github}" target="_blank" class="contact-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="${portfolioData.personal.linkedin}" target="_blank" class="contact-link">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="${portfolioData.personal.portfolio}" target="_blank" class="contact-link">
+                        <i class="fas fa-globe"></i> Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Function to populate experience window
+function populateExperienceWindow() {
+    const experienceContent = document.querySelector('.experience-content');
+    if (!experienceContent) return;
+
+    experienceContent.innerHTML = `
+        <div class="experience-timeline">
+            ${portfolioData.experience.map(exp => `
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h3 class="experience-title">${exp.role}</h3>
+                            <p class="experience-company">${exp.company}</p>
+                            <p class="experience-duration">${exp.duration}</p>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        <ul>
+                            ${exp.description.map(desc => `<li>${desc}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// Function to populate education window
+function populateEducationWindow() {
+    const educationContent = document.querySelector('.education-content');
+    if (!educationContent) return;
+
+    educationContent.innerHTML = `
+        <div class="education-timeline">
+            ${portfolioData.education.map(edu => `
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="education-degree">${edu.degree}</h3>
+                            <p class="education-institution">${edu.institution}</p>
+                            <p class="education-duration">${edu.duration || edu.year}</p>
+                        </div>
+                    </div>
+                    <div class="education-details">
+                        ${edu.cgpa ? `<p><span class="highlight">CGPA:</span> ${edu.cgpa}/10.0</p>` : ''}
+                        ${edu.percentage ? `<p><span class="highlight">Percentage:</span> ${edu.percentage}</p>` : ''}
+                        ${edu.board ? `<p><span class="highlight">Board:</span> ${edu.board}</p>` : ''}
+                        ${edu.achievement ? `<p><span class="highlight">Achievement:</span> ${edu.achievement}</p>` : ''}
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// Function to populate certifications window
+function populateCertificationsWindow() {
+    const certificationsContent = document.querySelector('.certifications-content');
+    if (!certificationsContent) return;
+
+    certificationsContent.innerHTML = `
+        <div class="certifications-grid">
+            ${portfolioData.certifications.map(cert => `
+                <div class="certification-card">
+                    <div class="certification-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="certification-details">
+                        <h3>${cert.name}</h3>
+                        <p>${cert.year}</p>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// Function to populate achievements window
+function populateAchievementsWindow() {
+    const achievementsContent = document.querySelector('.achievements-content');
+    if (!achievementsContent) return;
+
+    achievementsContent.innerHTML = `
+        <div class="achievements-list">
+            ${portfolioData.achievements.map(achievement => `
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="achievement-details">
+                        <h3>${achievement.title}</h3>
+                        ${achievement.details ? `<p>${achievement.details}</p>` : ''}
+                        <span class="year">${achievement.year}</span>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// Function to populate languages window
+function populateLanguagesWindow() {
+    const languagesContent = document.querySelector('.languages-content');
+    if (!languagesContent) return;
+
+    languagesContent.innerHTML = `
+        <div class="languages-list">
+            ${portfolioData.languages.map(lang => `
+                <div class="language-item">
+                    <div class="language-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="language-details">
+                        <h3>${lang.name}</h3>
+                        <p>${lang.proficiency}</p>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
 }
 
  

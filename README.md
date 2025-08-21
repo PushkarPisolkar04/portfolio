@@ -1,6 +1,6 @@
 # Kali Linux Portfolio
 
-A terminal-themed portfolio website inspired by Kali Linux, featuring a fully interactive terminal interface, file explorer, and system monitor.
+A terminal-themed portfolio website inspired by Kali Linux, featuring a fully interactive terminal interface and file explorer.
 
 ## Live Demo
 
@@ -19,17 +19,9 @@ A terminal-themed portfolio website inspired by Kali Linux, featuring a fully in
   - Styled content display
   - Google Drive integration for resume
 
-- 📊 System Monitor
-  - CPU usage
-  - RAM usage
-  - Network stats
-  - Uptime display
 
-- ⚙️ Settings Panel
-  - Theme customization
-  - Font size adjustment
-  - Cursor style options
-  - Animation toggles
+
+
 
 - 📱 Responsive Design
   - Mobile-friendly interface

@@ -16,14 +16,13 @@ const portfolioData = {
     },
 
     about: {
-        summary: "Final Year Computer Engineering student specializing in Cybersecurity with interest in Full-Stack Development. Proven ability to build secure, innovative applications, demonstrated by developing 3+ major projects including a secure e-voting system and a comprehensive vulnerability scanner. Recognized for technical excellence as a Gold Medallist at the state-level Aavishkar innovation competition.",
+        summary: "Computer Engineering student specializing in Cybersecurity with interest in Full-Stack and Mobile Development. Proven ability to build secure, innovative applications through 3+ major projects including a secure e-voting system and vulnerability scanner. Gold Medallist at state-level Aavishkar innovation competition.",
         strengths: [
             "Cybersecurity & Ethical Hacking",
-            "Penetration Testing",
+            "Penetration Testing & Vulnerability Assessment",
             "Problem-solving and analytical thinking",
-            "Project Management",
-            "Team Collaboration",
-            "Secure Application Development"
+            "Secure Application Development",
+            "Team Collaboration"
         ],
         interests: [
             "Cybersecurity",
