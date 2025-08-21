@@ -21,8 +21,8 @@
     --heading-font-size: 18px;
     --small-font-size: 14px;
     --text-color: #e0e0e0;
-    --section-spacing: 20px;
-    --card-padding: 20px;
+    --section-spacing: 12px;
+    --card-padding: 12px;
     --border-radius: 12px;
 }
 
@@ -62,7 +62,7 @@ body {
     background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(26, 26, 26, 0.95));
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 12px;
     border-top: 2px solid var(--kali-purple);
     z-index: 1000;
     backdrop-filter: blur(15px);
@@ -205,7 +205,7 @@ body {
 }
 
 .start-menu-header {
-    padding: 20px;
+    padding: 12px;
     border-bottom: 2px solid var(--kali-purple);
     display: flex;
     align-items: center;
@@ -258,11 +258,11 @@ body {
 }
 
 .start-menu-items {
-    padding: 15px;
+    padding: 10px;
 }
 
 .start-menu-item {
-    padding: 12px 15px;
+    padding: 8px 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -443,11 +443,11 @@ body {
 
 /* Desktop Icons */
 .desktop-icons {
-    padding: 30px;
+    padding: 18px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 120px);
-    gap: 25px;
-    height: calc(100vh - var(--taskbar-height) - 50px);
+    gap: 15px;
+    height: calc(100vh - var(--taskbar-height) - 30px);
     align-content: start;
     margin-top: 50px;
 }
@@ -633,7 +633,7 @@ body {
 .close { background: #ff3e3e; }
 
 .terminal-content {
-    padding: 20px;
+    padding: 12px;
     height: calc(100% - 40px);
     overflow-y: auto;
     font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
@@ -870,15 +870,15 @@ body {
 .file-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
-    padding: 20px;
+    gap: 10px;
+    padding: 12px;
 }
 
 .file-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px 10px;
+    padding: 10px 8px;
     cursor: pointer;
     border-radius: 12px;
     transition: all 0.3s ease;
@@ -956,7 +956,7 @@ body {
     transform: translate(-50%, -50%);
     background: var(--kali-dark);
     border: 1px solid var(--kali-purple);
-    padding: 20px;
+    padding: 12px;
     border-radius: 5px;
     z-index: 2000;
     display: none;
@@ -964,17 +964,17 @@ body {
 
 .shutdown-dialog h3 {
     color: var(--kali-purple);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 18px;
 }
 
 .shutdown-options {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .shutdown-option {
-    padding: 8px 15px;
+    padding: 6px 12px;
     background: var(--kali-purple);
     color: var(--kali-light);
     border: none;
@@ -1018,8 +1018,8 @@ body {
 .notification {
     background: var(--kali-dark);
     border: 1px solid var(--kali-purple);
-    padding: 12px;
-    margin-bottom: 10px;
+    padding: 8px;
+    margin-bottom: 8px;
     animation: slideIn 0.3s ease;
     font-size: 16px;
 }
@@ -1125,8 +1125,8 @@ body {
 
     .desktop-icons {
         grid-template-columns: repeat(auto-fill, 90px);
-        gap: 15px;
-        padding: 20px;
+        gap: 10px;
+        padding: 12px;
     }
 
     .desktop-icon {
@@ -1207,11 +1207,11 @@ body {
     }
 
     .contact-form {
-        padding: 15px;
+        padding: 10px;
     }
 
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .form-group input,
@@ -1388,7 +1388,7 @@ body {
 .splash-content {
     width: 100%;
     max-width: 500px;
-    padding: 20px;
+    padding: 12px;
     text-align: center;
 }
 
@@ -1419,11 +1419,11 @@ body {
 }
 
 .boot-text {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-align: left;
     font-family: 'DejaVu Sans Mono', monospace;
     background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--kali-purple);
 }
@@ -1444,7 +1444,7 @@ body {
 
 .login-container {
     background: var(--kali-dark);
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     border: 1px solid var(--kali-purple);
     box-shadow: 0 0 20px rgba(85, 124, 147, 0.2);
@@ -1458,7 +1458,7 @@ body {
 }
 
 .login-header {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .login-header h2 {
@@ -1612,17 +1612,17 @@ body {
 
 /* Contact Form Styles */
 .contact-form {
-    padding: 20px;
+    padding: 12px;
     color: var(--kali-purple);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     color: var(--kali-purple);
     font-weight: bold;
 }
@@ -1653,7 +1653,7 @@ body {
     background-color: var(--kali-purple);
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
     font-family: 'Courier New', monospace;
@@ -1674,8 +1674,8 @@ body {
 
 /* Success and Error Messages */
 .form-message {
-    padding: 10px;
-    margin: 10px 0;
+    padding: 8px;
+    margin: 8px 0;
     border-radius: 4px;
     font-family: 'Courier New', monospace;
 }
@@ -2025,7 +2025,7 @@ body {
 
 /* About Window Styling */
 .about-content {
-    padding: 20px;
+    padding: 12px;
     height: 100%;
     overflow: visible;
 }
@@ -2038,9 +2038,9 @@ body {
 .about-header {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
-    padding: 20px;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 12px;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
     border-radius: 16px;
     border: 1px solid rgba(139, 92, 246, 0.2);
@@ -2088,15 +2088,15 @@ body {
 }
 
 .about-summary {
-    margin-bottom: 25px;
-    padding: 20px;
+    margin-bottom: 20px;
+    padding: 12px;
     background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1));
     border-radius: 16px;
     border: 1px solid rgba(6, 182, 212, 0.2);
 }
 
 .about-summary h3 {
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
     font-size: 18px;
     font-weight: 600;
     color: var(--kali-cyan);
@@ -2115,8 +2115,8 @@ body {
 .about-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    margin-bottom: 25px;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 .about-column {
@@ -2205,14 +2205,14 @@ body {
 }
 
 .about-contact {
-    padding: 20px;
+    padding: 12px;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
     border-radius: 16px;
     border: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .about-contact h3 {
-    margin: 0 0 18px 0;
+    margin: 0 0 12px 0;
     font-size: 18px;
     font-weight: 600;
     color: var(--kali-purple);
@@ -2224,14 +2224,14 @@ body {
 .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
 }
 
 .contact-link {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
+    gap: 8px;
+    padding: 8px 12px;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: 12px;
@@ -2259,7 +2259,7 @@ body {
 .contact-info {
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
     border-radius: 16px;
-    padding: 25px;
+    padding: 15px;
     border: 1px solid rgba(139, 92, 246, 0.2);
     width: 100%;
     margin: 0;
@@ -2268,7 +2268,7 @@ body {
 
 .contact-info h3 {
     color: var(--kali-purple);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 24px;
     font-weight: 600;
     display: flex;
@@ -2286,7 +2286,7 @@ body {
 .contact-info p {
     color: var(--text-color);
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     font-size: 16px;
     text-align: center;
     max-width: 600px;
@@ -2369,14 +2369,12 @@ body {
 
 /* Specific fix for LinkedIn text overflow */
 .contact-method .contact-link[href*="linkedin"] {
-    font-size: 16px;
-    padding: 12px 16px;
+    padding: 8px 12px;
 }
 
 @media (max-width: 768px) {
     .contact-method .contact-link[href*="linkedin"] {
-        font-size: 14px;
-        padding: 10px 12px;
+        padding: 6px 10px;
     }
 }
 
@@ -3384,7 +3382,7 @@ body {
 
 /* Experience Section Styles */
 .experience-content {
-    padding: 20px;
+    padding: 12px;
     height: 100%;
     overflow: visible;
 }
@@ -3392,15 +3390,15 @@ body {
 .experience-timeline {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    padding: 20px;
+    gap: 15px;
+    padding: 12px;
 }
 
 .experience-card {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
     border-left: 4px solid var(--kali-green);
     border-radius: 16px;
-    padding: 25px;
+    padding: 15px;
     position: relative;
     transition: all 0.3s ease;
 }
@@ -3426,8 +3424,8 @@ body {
 .experience-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .experience-icon {
@@ -3462,7 +3460,7 @@ body {
     color: var(--kali-cyan);
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .experience-description {
@@ -3472,8 +3470,8 @@ body {
 }
 
 .experience-description ul {
-    margin: 10px 0;
-    padding-left: 20px;
+    margin: 8px 0;
+    padding-left: 15px;
 }
 
 .experience-description li {
@@ -3583,7 +3581,7 @@ body {
 
 /* Certifications Section Styles */
 .certifications-content {
-    padding: 20px;
+    padding: 12px;
     height: 100%;
     overflow: visible;
 }
@@ -3591,8 +3589,8 @@ body {
 .certifications-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 25px;
-    padding: 20px;
+    gap: 15px;
+    padding: 12px;
     overflow: visible;
 }
 
@@ -3618,10 +3616,10 @@ body {
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
     border: 1px solid rgba(251, 191, 36, 0.3);
     border-radius: 16px;
-    padding: 25px;
+    padding: 15px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -3674,7 +3672,7 @@ body {
 
 /* Achievements Section Styles */
 .achievements-content {
-    padding: 20px;
+    padding: 12px;
     height: 100%;
     overflow: visible;
 }
@@ -3776,7 +3774,7 @@ body {
 
 /* Languages Section Styles */
 .languages-content {
-    padding: 20px;
+    padding: 12px;
     height: 100%;
     overflow: visible;
 }
@@ -3784,8 +3782,8 @@ body {
 .languages-list {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    padding: 20px;
+    gap: 15px;
+    padding: 12px;
     max-height: 600px;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -3813,10 +3811,10 @@ body {
 .language-item {
     background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(219, 39, 119, 0.1));
     border-radius: 16px;
-    padding: 25px;
+    padding: 15px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
