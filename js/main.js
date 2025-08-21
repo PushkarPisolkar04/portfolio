@@ -4,9 +4,9 @@ const commands = {
         return `Available Commands:
 help         - Show this help message
 whoami       - Display user information
-ls           - List files and directories
-cd           - Change directory
-cat          - Display file contents
+ls           - List available portfolio sections
+cd           - Navigate to portfolio section
+cat          - Open portfolio section or external links
 clear        - Clear terminal
 date         - Show current date and time
 echo         - Display a line of text
@@ -17,15 +17,21 @@ Portfolio Commands:
 projects     - Open projects window
 skills       - Open skills window
 contact      - Open contact window
-about        - Show about me information
-experience   - Show work experience
+about        - Open about me window
+experience   - Open experience window
 github       - Open GitHub profile
 linkedin     - Open LinkedIn profile
 resume       - View resume
-education    - Show educational background
-certifications - List certifications
-achievements - Show achievements
-languages    - Show language proficiencies`;
+education    - Open education window
+certifications - Open certifications window
+achievements - Open achievements window
+languages    - Open languages window
+
+Examples:
+• ls                    - List all available sections
+• cd projects           - Open projects section
+• cat resume            - Open resume
+• cat github            - Open GitHub profile`;
     },
 
     whoami: () => {
@@ -39,110 +45,78 @@ Education: ${portfolioData.personal.education}
 Current: ${portfolioData.personal.current}`;
     },
 
-    ls: () => `projects/
-resume/
-skills/
-about/
-experience/
-education/
-certifications/
-achievements/
-contact.txt
-languages.txt
-README.md
-github.txt
-linkedin.txt`,
+    ls: () => {
+        return `Available Portfolio Sections:
+📁 projects/     - View my projects
+📁 skills/       - View my skills
+📁 about/        - About me information
+📁 experience/   - Work experience
+📁 education/    - Educational background
+📁 certifications/ - Professional certifications
+📁 achievements/ - Awards and achievements
+📁 languages/    - Language proficiencies
+📁 contact/      - Contact information
+
+Quick Access Commands:
+• projects     - Open projects window
+• skills       - Open skills window
+• about        - Open about window
+• experience   - Open experience window
+• education    - Open education window
+• certifications - Open certifications window
+• achievements - Open achievements window
+• languages    - Open languages window
+• contact      - Open contact window
+• github       - Open GitHub profile
+• linkedin     - Open LinkedIn profile
+• resume       - View resume`;
+    },
 
     cd: (dir) => {
-        if (!dir) return 'Please specify a directory';
-        if (dir === 'secret') {
+        if (!dir) return 'Usage: cd <section>\nAvailable sections: projects, skills, about, experience, education, certifications, achievements, languages, contact';
+        
+        const validDirs = ['projects', 'skills', 'about', 'experience', 'education', 'certifications', 'achievements', 'languages', 'contact'];
+        if (validDirs.includes(dir.toLowerCase())) {
+            openWindow(dir.toLowerCase());
+            return `Opening ${dir} section...`;
+        } else if (dir === 'secret') {
             return 'Access denied. Initiating security protocol...';
+        } else {
+            return `Directory not found: ${dir}\nAvailable: ${validDirs.join(', ')}`;
         }
-        return `Changed directory to ${dir}`;
     },
 
     cat: (args) => {
-        if (!args[0]) return 'Usage: cat <filename>';
+        if (!args[0]) return 'Usage: cat <section>\nAvailable sections: projects, skills, about, experience, education, certifications, achievements, languages, contact, resume, github, linkedin';
         
-        const file = args[0].toLowerCase();
-        switch(file) {
-            case 'resume.txt':
-                return `Resume Information:
-Name: ${portfolioData.personal.name}
-Role: ${portfolioData.personal.role}
-Contact: ${portfolioData.personal.email} | ${portfolioData.personal.phone}
-
-Experience:
-${portfolioData.personal.current}
-
-Education:
-${portfolioData.education.map(edu => 
-    `${edu.degree} - ${edu.institution} (${edu.duration || edu.year})`
-).join('\n')}
-
-Skills:
-${Object.entries(portfolioData.skills).map(([category, skills]) => 
-    `${category}: ${Array.isArray(skills) ? skills.join(', ') : 
-        Object.entries(skills).map(([subcat, items]) => 
-            `${subcat}: ${items.join(', ')}`
-        ).join('\n')}`
-).join('\n')}`;
-
-            case 'projects.txt':
-            case 'skills.txt':
-            case 'education.txt':
-            case 'certifications.txt':
-            case 'achievements.txt':
-            case 'contact.txt':
-            case 'about.txt':
-            case 'languages.txt':
-            case 'experience.txt':
-                // Read from the actual file
-                return fetch(`assets/files/${file}`)
-                    .then(response => response.text())
-                    .catch(error => `Error reading file: ${error}`);
-
-            case 'github.txt':
-                return `GitHub Profile:
-Username: ${portfolioData.personal.github.split('/').pop()}
-URL: ${portfolioData.personal.github}
-
-Projects:
-${portfolioData.projects.map(project => 
-    `• ${project.name}${project.status ? ` (${project.status})` : ''}`
-).join('\n')}`;
-
-            case 'linkedin.txt':
-                return `LinkedIn Profile:
-URL: ${portfolioData.personal.linkedin}
-
-Current Position: ${portfolioData.personal.current}
-Education: ${portfolioData.personal.education}
-Location: ${portfolioData.personal.location}`;
-
-            case 'readme.md':
-                return `# ${portfolioData.personal.name}'s Portfolio
-
-## About
-${portfolioData.about.summary}
-
-## Skills
-${Object.entries(portfolioData.skills).map(([category, skills]) => 
-    `### ${category}
-${Array.isArray(skills) ? skills.join(', ') : 
-    Object.entries(skills).map(([subcat, items]) => 
-        `${subcat}: ${items.join(', ')}`
-    ).join('\n')}`
-).join('\n\n')}
-
-## Contact
-Email: ${portfolioData.personal.email}
-Phone: ${portfolioData.personal.phone}
-GitHub: ${portfolioData.personal.github}
-LinkedIn: ${portfolioData.personal.linkedin}`;
-
+        const section = args[0].toLowerCase();
+        switch(section) {
+            case 'resume':
+                window.open(portfolioData.personal.resume, '_blank');
+                return 'Opening resume...';
+                
+            case 'github':
+                window.open(portfolioData.personal.github, '_blank');
+                return 'Opening GitHub profile...';
+                
+            case 'linkedin':
+                window.open(portfolioData.personal.linkedin, '_blank');
+                return 'Opening LinkedIn profile...';
+                
+            case 'projects':
+            case 'skills':
+            case 'about':
+            case 'experience':
+            case 'education':
+            case 'certifications':
+            case 'achievements':
+            case 'languages':
+            case 'contact':
+                openWindow(section);
+                return `Opening ${section} window...`;
+                
             default:
-                return `File not found: ${file}`;
+                return `Section not found: ${section}\nAvailable: projects, skills, about, experience, education, certifications, achievements, languages, contact, resume, github, linkedin`;
         }
     },
 
@@ -167,44 +141,28 @@ LinkedIn: ${portfolioData.personal.linkedin}`;
     },
 
     education: () => {
-        return `Educational Background:
-${portfolioData.education.map(edu => 
-    `• ${edu.degree}
-  Institution: ${edu.institution}
-  ${edu.duration ? `Duration: ${edu.duration}` : `Year: ${edu.year}`}
-  ${edu.cgpa ? `CGPA: ${edu.cgpa}` : ''}
-  ${edu.percentage ? `Percentage: ${edu.percentage}` : ''}
-  ${edu.achievement ? `Achievement: ${edu.achievement}` : ''}`
-).join('\n\n')}`;
+        openWindow('education');
+        return `Opening Education window...`;
     },
 
     certifications: () => {
-        return `Certifications:
-${portfolioData.certifications.map(cert => 
-    `• ${cert.name} (${cert.year})`
-).join('\n')}`;
+        openWindow('certifications');
+        return `Opening Certifications window...`;
     },
 
     achievements: () => {
-        return `Achievements:
-${portfolioData.achievements.map(achievement => 
-    `• ${achievement.title}${achievement.details ? ` - ${achievement.details}` : ''} (${achievement.year})`
-).join('\n')}`;
+        openWindow('achievements');
+        return `Opening Achievements window...`;
     },
 
     languages: () => {
-        return `Language Proficiencies:
-${portfolioData.languages.map(lang => 
-    `• ${lang.name}: ${lang.proficiency}`
-).join('\n')}`;
+        openWindow('languages');
+        return `Opening Languages window...`;
     },
 
     experience: () => {
-        return `Work Experience:
-${portfolioData.experience.map(exp => 
-    `• ${exp.role} at ${exp.company} (${exp.duration})
-  ${exp.description.join('\n  ')}`
-).join('\n\n')}`;
+        openWindow('experience');
+        return `Opening Experience window...`;
     },
 
     github: () => {
@@ -782,20 +740,20 @@ function toggleStartMenu() {
 
 
 
-// Auto boot functionality
+// Auto boot functionality - optimized for performance
 function autoBoot() {
     const bootLines = document.querySelectorAll('.boot-line');
     bootLines.forEach((line, index) => {
         setTimeout(() => {
             line.style.opacity = '1';
-        }, index * 500);
+        }, index * 300); // Reduced from 500ms to 300ms
     });
 
     setTimeout(() => {
         document.getElementById('splash-screen').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
         showNotification('System booted successfully');
-    }, 2500);
+    }, 1800); // Reduced from 2500ms to 1800ms
 }
 
 // Call autoBoot when page loads
@@ -1130,7 +1088,8 @@ function updateClock() {
     }
 }
 
-setInterval(updateClock, 1000);
+// Optimized clock update - only update every 5 seconds to reduce performance overhead
+setInterval(updateClock, 5000);
 updateClock();
 
 // Close windows when clicking outside
