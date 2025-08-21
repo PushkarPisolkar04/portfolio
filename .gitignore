@@ -76,15 +76,6 @@ $RECYCLE.BIN/
 *.wav
 *.ogg
 
-# Images
-avatar.jpg
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.ico
-*.svg
-
 # Personal data
 **/personal/
 **/private/

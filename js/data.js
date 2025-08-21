@@ -2,33 +2,35 @@
 const portfolioData = {
     personal: {
         name: "Pushkar Pisolkar",
-        role: "Cybersecurity Intern",
+        role: "Final Year Computer Engineering Student",
         location: "India",
         status: "Active",
-        focus: "Cybersecurity, UI/UX",
+        focus: "Cybersecurity",
         education: "B.Tech in Computer Engineering",
-        current: "Cybersecurity Intern at SURE TRUST",
+        current: "Student",
         email: "pushkarppisolkar@gmail.com",
-        phone: "+91 7709797455 / 9322568173",
         github: "https://github.com/PushkarPisolkar04",
         linkedin: "https://linkedin.com/in/pushkar-pisolkar",
+        portfolio: "https://whois-pushkar.vercel.app",
         resume: "https://drive.google.com/file/d/1yZ-gvYeAM3YfvQNZUKa1IddPL0lv7lMJ/view?usp=sharing"
     },
 
     about: {
-        summary: "I am a Computer Engineering student with a strong focus on Cybersecurity and Full Stack Development. Currently interning at SURE TRUST, I combine technical expertise with practical security knowledge.",
+        summary: "Final Year Computer Engineering student specializing in Cybersecurity with interest in Full-Stack Development. Proven ability to build secure, innovative applications, demonstrated by developing 3+ major projects including a secure e-voting system and a comprehensive vulnerability scanner. Recognized for technical excellence as a Gold Medallist at the state-level Aavishkar innovation competition.",
         strengths: [
             "Cybersecurity & Ethical Hacking",
-            "UI/UX Design",
+            "Penetration Testing",
             "Problem-solving and analytical thinking",
             "Project Management",
-            "Team Collaboration"
+            "Team Collaboration",
+            "Secure Application Development"
         ],
         interests: [
-            "Web Development",
-            "App Development",
-            "UI/UX Design",
-            "Game Development"
+            "Cybersecurity",
+            "Full-Stack Development",
+            "Mobile Development",
+            "Cloud Computing (AWS)",
+            "DevOps"
         ]
     },
 
@@ -37,7 +39,7 @@ const portfolioData = {
             degree: "B.Tech in Computer Engineering",
             institution: "Bajaj Institute of Technology, Wardha",
             duration: "2022–2026",
-            cgpa: "7.0",
+            cgpa: "7.23",
             focus: "Cybersecurity"
         },
         {
@@ -58,26 +60,42 @@ const portfolioData = {
     ],
 
     skills: {
-        programming: ["C", "C++", "Java", "Python"],
+        programming: ["Python", "Java", "C++", "JavaScript", "TypeScript", "Dart", "SQL"],
         web: {
-            frontend: ["HTML", "CSS", "JavaScript", "React"],
-            backend: ["Node.js"],
-            fullstack: ["Full Stack Development"]
+            frontend: ["React.js", "HTML5", "CSS3", "TailwindCSS", "Chakra UI"],
+            backend: ["Node.js", "Express.js", "JWT", "RESTful APIs"],
+            fullstack: ["Full Stack Development", "Vite", "npm/yarn"]
         },
         app: ["Flutter", "Dart", "Firebase", "Google APIs"],
-        database: ["MySQL", "Firebase"],
+        database: ["MySQL", "Firebase Firestore", "Supabase (PostgreSQL)", "MongoDB"],
         cybersecurity: [
-            "Ethical Hacking",
             "Penetration Testing",
-            "Bug Bounty",
-            "Vulnerability Assessment"
+            "Vulnerability Assessment",
+            "Nmap",
+            "Burp Suite",
+            "Metasploit",
+            "Ethical Hacking",
+            "OWASP Top 10",
+            "Security Incident Response",
+            "Cisco Junior Cybersecurity Analyst"
+        ],
+        cloud: [
+            "AWS Cloud Foundations",
+            "AWS Services (Learning)",
+            "Cloud Security",
+            "Firebase",
+            "Supabase"
+        ],
+        devops: [
+            "Git & GitHub",
+            "Docker (Basic)",
+            "CI/CD (GitHub Actions)",
+            "Version Control"
         ],
         tools: [
-            "UI/UX Design (Figma)",
-            "Version Control (Git, GitHub)",
-            "Cloud Platforms (Google Cloud, Firebase)",
-            "Game Development (Unity basics)",
-            "Gamification Principles"
+            "Figma",
+            "API Testing (Postman)",
+            "Game Development (Basic)"
         ]
     },
 
@@ -85,37 +103,67 @@ const portfolioData = {
         {
             name: "Cryptonix",
             status: "In Progress",
-            description: "Vulnerability Scanner and Penetration Testing Tool",
-            techStack: ["Python", "Nmap", "Burp Suite", "Shodan", "Exploit DB"],
-            features: ["Combines multiple security tools for comprehensive scanning"]
+            description: "Vulnerability Scanner & Penetration Testing Tool",
+            techStack: ["Python", "Nmap", "Burp Suite", "Shodan", "Exploit-DB"],
+            features: [
+                "Command-line toolkit for security professionals",
+                "Automates vulnerability discovery and assessment",
+                "Integrates 3+ industry-standard utilities",
+                "Accelerates initial security audits"
+            ],
+            image: "assets/images/cryptonix.png",
+            github: "https://github.com/PushkarPisolkar04/cryptonix",
+            live: null
         },
         {
             name: "eMatdaan",
-            description: "Decentralized eVoting System",
-            techStack: ["React.js", "Node.js", "MetaMask", "Paillier", "IPFS", "Hyperledger Indy"],
-            features: ["Secure digital voting with blockchain integration"]
+            description: "Secure Organizational Voting Platform",
+            techStack: ["React.js", "TypeScript", "Node.js", "Express.js", "Supabase (PostgreSQL)", "TailwindCSS", "Vite", "Nodemailer", "JWT"],
+            features: [
+                "Full-stack digital voting platform",
+                "End-to-end encryption and digital signatures",
+                "Complete voter anonymity",
+                "Designed for organizational elections"
+            ],
+            image: "assets/images/ematdaan.png",
+            github: "https://github.com/PushkarPisolkar04/ematdaan",
+            live: "https://ematdaan.vercel.app/"
         },
         {
             name: "IPlay",
-            description: "Gamified IPR Awareness App",
-            techStack: ["Flutter", "Firebase"],
-            features: ["Educational mini-games for IPR learning"]
+            description: "Gamified IPR Awareness Application",
+            techStack: ["Flutter", "Dart", "Firebase"],
+            features: [
+                "Award-winning mobile app",
+                "7 interactive games for IPR learning",
+                "Teaches complex concepts in engaging way",
+                "Designed for students"
+            ],
+            image: "assets/images/iplay.png",
+            github: "https://github.com/PushkarPisolkar04/iplay",
+            live: null
         },
         {
             name: "ByteMe",
-            description: "Universal Converter Tool",
-            techStack: ["React", "Node.js", "Express.js"],
-            features: ["130+ conversion types including binary, decimal, IEEE 754"]
-        },
-        {
-            name: "Web Vulnerability Tester",
-            status: "WIP",
-            description: "All-in-one website vulnerability testing tool",
-            features: ["Integration of Burp Suite, Shodan, and Nmap concepts"]
+            description: "Universal Data Converter",
+            techStack: ["React.js", "Node.js", "Express.js", "Vite"],
+            features: [
+                "60+ different data formats and number systems",
+                "Binary, hexadecimal, decimal, octal conversions",
+                "IEEE 754 floating point, Base64/32, Hamming codes",
+                "Real-time conversion with configurable precision"
+            ],
+            image: "assets/images/bytime.png",
+            github: "https://github.com/PushkarPisolkar04/ByteMe",
+            live: null
         }
     ],
 
     certifications: [
+        {
+            name: "Cisco Junior Cybersecurity Analyst Career Path",
+            year: "2024"
+        },
         {
             name: "Google Cybersecurity Professional Certificate",
             year: "2024"
@@ -129,43 +177,46 @@ const portfolioData = {
             year: "2024"
         },
         {
+            name: "AWS Cloud Foundations (In Progress)",
+            year: "2024"
+        },
+        {
             name: "HTML, CSS, JS for Web Developers – Coursera",
             year: "2023"
         },
         {
-            name: "AI/ML for GeoData Analysis",
-            year: "2024"
-        },
-        {
-            name: "Career Readiness – Online Job Skills Training",
-            year: "2024"
-        },
-        {
             name: "Figma UI/UX Design – Value Added Program",
             year: "2023"
-        },
+        }
+    ],
+
+    experience: [
         {
-            name: "Google Cloud Training Programs",
-            year: "Since 2023"
+            role: "Cybersecurity Intern",
+            company: "Sure Trust ProEd",
+            duration: "Dec 2024 – June 2025 (6 months)",
+            description: [
+                "Completed comprehensive training program on industry-standard cybersecurity practices and tools",
+                "Conducted end-to-end VAPT on 32+ IPs and web applications (e.g., DVWA, bWAPP)",
+                "Identified multiple CVEs and generated structured remediation reports",
+                "Gained hands-on experience with penetration testing methodologies"
+            ]
         }
     ],
 
     achievements: [
         {
-            title: "Finalist – Flipkart Grid 6.0",
+            title: "Gold Medalist (Zonal) – Aavishkar",
+            details: "State-level innovation competition",
             year: "2024"
         },
         {
-            title: "Level 3 Qualifier – Tata Imagination Challenge",
+            title: "Semi-Finalist – Flipkart Grid 6.0",
+            details: "National software development hackathon hosted by Flipkart",
             year: "2024"
         },
         {
-            title: "Gold Medal – Aavishkar Competition",
-            details: "Zonal Level",
-            year: "2024"
-        },
-        {
-            title: "100/100 in CBSE Mathematics",
+            title: "100/100 in CBSE Class 10 Mathematics",
             year: "2020"
         }
     ],
@@ -177,11 +228,11 @@ const portfolioData = {
         },
         {
             name: "Hindi",
-            proficiency: "Advanced"
+            proficiency: "Professional"
         },
         {
             name: "English",
-            proficiency: "Advanced"
+            proficiency: "Professional"
         }
     ]
 }; 

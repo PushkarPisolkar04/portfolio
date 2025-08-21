@@ -1,27 +1,31 @@
 // Terminal commands
 const commands = {
     help: () => {
-        return `Available commands:
-help - Show this help message
-whoami - Display user information
-ls - List files and directories
-cd - Change directory
-cat - Display file contents
-clear - Clear terminal
-date - Show current date and time
-echo - Display a line of text
-pwd - Print working directory
-projects - List all projects
-skills - Show technical skills
-contact - Display contact information
-about - Show about me information
-github - Open GitHub profile
-linkedin - Open LinkedIn profile
-resume - View resume
-education - Show educational background
+        return `Available Commands:
+help         - Show this help message
+whoami       - Display user information
+ls           - List files and directories
+cd           - Change directory
+cat          - Display file contents
+clear        - Clear terminal
+date         - Show current date and time
+echo         - Display a line of text
+pwd          - Print working directory
+hack         - Initiate hacking sequence
+
+Portfolio Commands:
+projects     - Open projects window
+skills       - Open skills window
+contact      - Open contact window
+about        - Show about me information
+experience   - Show work experience
+github       - Open GitHub profile
+linkedin     - Open LinkedIn profile
+resume       - View resume
+education    - Show educational background
 certifications - List certifications
 achievements - Show achievements
-languages - Show language proficiencies`;
+languages    - Show language proficiencies`;
     },
 
     whoami: () => {
@@ -39,6 +43,7 @@ Current: ${portfolioData.personal.current}`;
 resume/
 skills/
 about/
+experience/
 education/
 certifications/
 achievements/
@@ -51,7 +56,6 @@ linkedin.txt`,
     cd: (dir) => {
         if (!dir) return 'Please specify a directory';
         if (dir === 'secret') {
-            triggerMatrixRain();
             return 'Access denied. Initiating security protocol...';
         }
         return `Changed directory to ${dir}`;
@@ -92,6 +96,7 @@ ${Object.entries(portfolioData.skills).map(([category, skills]) =>
             case 'contact.txt':
             case 'about.txt':
             case 'languages.txt':
+            case 'experience.txt':
                 // Read from the actual file
                 return fetch(`assets/files/${file}`)
                     .then(response => response.text())
@@ -142,38 +147,18 @@ LinkedIn: ${portfolioData.personal.linkedin}`;
     },
 
     projects: () => {
-        return `Featured Projects:
-${portfolioData.projects.map(project => 
-    `• ${project.name}${project.status ? ` (${project.status})` : ''}
-  Description: ${project.description}
-  Tech Stack: ${project.techStack ? project.techStack.join(', ') : 'N/A'}
-  Features: ${project.features.join(', ')}`
-).join('\n\n')}`;
+        openWindow('projects');
+        return `Opening Projects window...`;
     },
 
     skills: () => {
-        return `Technical Skills Overview:
-Programming Languages: ${portfolioData.skills.programming.join(', ')}
-
-Web Development:
-Frontend: ${portfolioData.skills.web.frontend.join(', ')}
-Backend: ${portfolioData.skills.web.backend.join(', ')}
-Full Stack: ${portfolioData.skills.web.fullstack.join(', ')}
-
-App Development: ${portfolioData.skills.app.join(', ')}
-Database: ${portfolioData.skills.database.join(', ')}
-
-Cybersecurity: ${portfolioData.skills.cybersecurity.join(', ')}
-
-Tools & Technologies: ${portfolioData.skills.tools.join(', ')}`;
+        openWindow('skills');
+        return `Opening Skills window...`;
     },
 
     contact: () => {
-        return `Contact Information:
-Email: ${portfolioData.personal.email}
-Phone: ${portfolioData.personal.phone}
-GitHub: ${portfolioData.personal.github}
-LinkedIn: ${portfolioData.personal.linkedin}`;
+        openWindow('contact-form');
+        return `Opening Contact window...`;
     },
 
     about: () => {
@@ -220,6 +205,14 @@ ${portfolioData.languages.map(lang =>
 ).join('\n')}`;
     },
 
+    experience: () => {
+        return `Work Experience:
+${portfolioData.experience.map(exp => 
+    `• ${exp.role} at ${exp.company} (${exp.duration})
+  ${exp.description.join('\n  ')}`
+).join('\n\n')}`;
+    },
+
     github: () => {
         window.open(portfolioData.personal.github, '_blank');
         return 'Opening GitHub profile...';
@@ -247,10 +240,7 @@ ${portfolioData.languages.map(lang =>
         return '';
     },
 
-    matrix: () => {
-        triggerMatrixRain();
-        return 'Matrix mode activated. System compromised.';
-    },
+
 
     hack: () => {
         const hackerbot = document.createElement('div');
@@ -268,7 +258,6 @@ ${portfolioData.languages.map(lang =>
     sudo: (command) => {
         if (!command) return 'Please specify a command to run as superuser';
         if (command === 'rm -rf /') {
-            triggerMatrixRain();
             return 'Access denied. Initiating security protocol...';
         }
         
@@ -282,16 +271,7 @@ ${portfolioData.languages.map(lang =>
         }
     },
 
-    neofetch: () => `OS: Kali Linux Portfolio
-Host: ctrlalthack
-Kernel: 5.15.0-kali3-amd64
-Shell: /bin/bash
-Terminal: xterm-256color
-CPU: Intel i7-10700K
-Memory: 16GB
-Theme: Dark
-Icons: Font Awesome
-Resolution: 1920x1080`,
+
 
     date: () => new Date().toLocaleString(),
 
@@ -387,10 +367,11 @@ terminalInput.addEventListener('keypress', (e) => {
             // Add command separator
             addCommandSeparator();
             
-            // Create command line with prompt
+            // Create command line with prompt and timestamp
             const commandLine = document.createElement('div');
-            commandLine.className = 'terminal-line';
-            commandLine.innerHTML = `<span class="prompt">root@kali$</span> ${command}`;
+            commandLine.className = 'terminal-line command';
+            const timestamp = new Date().toLocaleTimeString();
+            commandLine.innerHTML = `<span class="prompt">[${timestamp}] root@kali:~#</span> ${command}`;
             terminalOutput.appendChild(commandLine);
             
             // Execute command
@@ -433,15 +414,21 @@ function makeDraggable(element) {
     let xOffset = 0;
     let yOffset = 0;
 
+    if (!header) return; // Exit if no header found
+
     header.addEventListener('mousedown', dragStart);
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', dragEnd);
 
     function dragStart(e) {
+        if (e.target.closest('.terminal-controls')) return; // Don't drag when clicking controls
+        
         initialX = e.clientX - xOffset;
         initialY = e.clientY - yOffset;
-        if (e.target === header) {
+        if (e.target === header || header.contains(e.target)) {
             isDragging = true;
+            element.style.transition = 'none'; // Disable transition during drag
+            element.style.cursor = 'grabbing';
         }
     }
 
@@ -457,9 +444,13 @@ function makeDraggable(element) {
     }
 
     function dragEnd() {
-        initialX = currentX;
-        initialY = currentY;
-        isDragging = false;
+        if (isDragging) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+            element.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'; // Re-enable transition
+            element.style.cursor = 'default';
+        }
     }
 
     function setTranslate(xPos, yPos, el) {
@@ -471,11 +462,242 @@ function makeDraggable(element) {
 document.querySelectorAll('.terminal-window, .file-explorer').forEach(makeDraggable);
 
 // Window controls
+let currentZIndex = 1000;
+
+function getNextZIndex() {
+    return ++currentZIndex;
+}
+
+// Function to handle file clicks
+function openFile(filename) {
+    const terminalOutput = document.getElementById('terminal-output');
+    if (terminalOutput) {
+        const output = document.createElement('div');
+        output.className = 'terminal-line';
+        
+        switch(filename) {
+            case 'resume.pdf':
+                window.open(portfolioData.personal.resume, '_blank');
+                output.textContent = `[+] Opening resume from Google Drive...`;
+                break;
+            case 'about.txt':
+                output.textContent = commands.about();
+                break;
+            case 'experience.txt':
+                output.textContent = commands.experience();
+                break;
+            case 'education.txt':
+                output.textContent = commands.education();
+                break;
+            case 'certifications.txt':
+                output.textContent = commands.certifications();
+                break;
+            case 'achievements.txt':
+                output.textContent = commands.achievements();
+                break;
+            case 'languages.txt':
+                output.textContent = commands.languages();
+                break;
+            case 'github.txt':
+                output.textContent = commands.github();
+                break;
+            case 'linkedin.txt':
+                output.textContent = commands.linkedin();
+                break;
+            default:
+                output.textContent = `[!] File not found: ${filename}`;
+        }
+        
+        terminalOutput.appendChild(output);
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+}
+
+// Function to show file categories
+function showFileCategory(category) {
+    const fileGrid = document.querySelector('.file-grid');
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    
+    // Remove active class from all sidebar items
+    sidebarItems.forEach(item => item.classList.remove('active'));
+    
+    // Add active class to clicked item
+    event.target.closest('.sidebar-item').classList.add('active');
+    
+    if (!fileGrid) return;
+    
+    const allFiles = `
+        <div class="file-item" onclick="openFile('resume.pdf')">
+            <i class="fas fa-file-pdf" style="color: var(--kali-red);"></i>
+            <span>Resume</span>
+            <small class="file-info">PDF</small>
+        </div>
+        <div class="file-item" onclick="openWindow('projects')">
+            <i class="fas fa-code" style="color: var(--kali-orange);"></i>
+            <span>Projects</span>
+        </div>
+        <div class="file-item" onclick="openWindow('skills')">
+            <i class="fas fa-brain" style="color: var(--kali-cyan);"></i>
+            <span>Skills</span>
+        </div>
+        <div class="file-item" onclick="openWindow('contact-form')">
+            <i class="fas fa-envelope" style="color: var(--kali-pink);"></i>
+            <span>Contact</span>
+        </div>
+        <div class="file-item" onclick="openWindow('terminal')">
+            <i class="fas fa-terminal" style="color: var(--kali-green);"></i>
+            <span>Terminal</span>
+        </div>
+        <div class="file-item" onclick="openWindow('monitor')">
+            <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
+            <span>Monitor</span>
+        </div>
+        <div class="file-item" onclick="openWindow('settings')">
+            <i class="fas fa-cog" style="color: var(--kali-blue);"></i>
+            <span>Settings</span>
+        </div>
+        <div class="file-item" onclick="openFile('about.txt')">
+            <i class="fas fa-user" style="color: var(--kali-orange);"></i>
+            <span>About Me</span>
+        </div>
+        <div class="file-item" onclick="openFile('experience.txt')">
+            <i class="fas fa-briefcase" style="color: var(--kali-purple);"></i>
+            <span>Experience</span>
+        </div>
+        <div class="file-item" onclick="openFile('education.txt')">
+            <i class="fas fa-graduation-cap" style="color: var(--kali-cyan);"></i>
+            <span>Education</span>
+        </div>
+        <div class="file-item" onclick="openFile('certifications.txt')">
+            <i class="fas fa-certificate" style="color: var(--kali-yellow);"></i>
+            <span>Certifications</span>
+        </div>
+        <div class="file-item" onclick="openFile('achievements.txt')">
+            <i class="fas fa-trophy" style="color: var(--kali-orange);"></i>
+            <span>Achievements</span>
+        </div>
+        <div class="file-item" onclick="openFile('languages.txt')">
+            <i class="fas fa-language" style="color: var(--kali-pink);"></i>
+            <span>Languages</span>
+        </div>
+        <div class="file-item" onclick="openFile('github.txt')">
+            <i class="fab fa-github" style="color: var(--kali-purple);"></i>
+            <span>GitHub</span>
+        </div>
+        <div class="file-item" onclick="openFile('linkedin.txt')">
+            <i class="fab fa-linkedin" style="color: var(--kali-blue);"></i>
+            <span>LinkedIn</span>
+        </div>
+    `;
+    
+    const personalFiles = `
+        <div class="file-item" onclick="openFile('resume.pdf')">
+            <i class="fas fa-file-pdf" style="color: var(--kali-red);"></i>
+            <span>Resume</span>
+            <small class="file-info">PDF</small>
+        </div>
+        <div class="file-item" onclick="openFile('about.txt')">
+            <i class="fas fa-user" style="color: var(--kali-orange);"></i>
+            <span>About Me</span>
+        </div>
+        <div class="file-item" onclick="openFile('languages.txt')">
+            <i class="fas fa-language" style="color: var(--kali-pink);"></i>
+            <span>Languages</span>
+        </div>
+    `;
+    
+    const professionalFiles = `
+        <div class="file-item" onclick="openFile('experience.txt')">
+            <i class="fas fa-briefcase" style="color: var(--kali-purple);"></i>
+            <span>Experience</span>
+        </div>
+        <div class="file-item" onclick="openFile('education.txt')">
+            <i class="fas fa-graduation-cap" style="color: var(--kali-cyan);"></i>
+            <span>Education</span>
+        </div>
+        <div class="file-item" onclick="openFile('certifications.txt')">
+            <i class="fas fa-certificate" style="color: var(--kali-yellow);"></i>
+            <span>Certifications</span>
+        </div>
+        <div class="file-item" onclick="openFile('achievements.txt')">
+            <i class="fas fa-trophy" style="color: var(--kali-orange);"></i>
+            <span>Achievements</span>
+        </div>
+    `;
+    
+    const socialFiles = `
+        <div class="file-item" onclick="openFile('github.txt')">
+            <i class="fab fa-github" style="color: var(--kali-purple);"></i>
+            <span>GitHub</span>
+        </div>
+        <div class="file-item" onclick="openFile('linkedin.txt')">
+            <i class="fab fa-linkedin" style="color: var(--kali-blue);"></i>
+            <span>LinkedIn</span>
+        </div>
+        <div class="file-item" onclick="openWindow('contact-form')">
+            <i class="fas fa-envelope" style="color: var(--kali-pink);"></i>
+            <span>Contact</span>
+        </div>
+    `;
+    
+    const toolsFiles = `
+        <div class="file-item" onclick="openWindow('projects')">
+            <i class="fas fa-code" style="color: var(--kali-orange);"></i>
+            <span>Projects</span>
+        </div>
+        <div class="file-item" onclick="openWindow('skills')">
+            <i class="fas fa-brain" style="color: var(--kali-cyan);"></i>
+            <span>Skills</span>
+        </div>
+        <div class="file-item" onclick="openWindow('terminal')">
+            <i class="fas fa-terminal" style="color: var(--kali-green);"></i>
+            <span>Terminal</span>
+        </div>
+        <div class="file-item" onclick="openWindow('monitor')">
+            <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
+            <span>Monitor</span>
+        </div>
+        <div class="file-item" onclick="openWindow('settings')">
+            <i class="fas fa-cog" style="color: var(--kali-blue);"></i>
+            <span>Settings</span>
+        </div>
+    `;
+    
+    switch(category) {
+        case 'all':
+            fileGrid.innerHTML = allFiles;
+            break;
+        case 'personal':
+            fileGrid.innerHTML = personalFiles;
+            break;
+        case 'professional':
+            fileGrid.innerHTML = professionalFiles;
+            break;
+        case 'social':
+            fileGrid.innerHTML = socialFiles;
+            break;
+        case 'tools':
+            fileGrid.innerHTML = toolsFiles;
+            break;
+        default:
+            fileGrid.innerHTML = allFiles;
+    }
+}
+
 function openWindow(windowId) {
     const window = document.getElementById(`${windowId}-window`);
     if (window) {
         window.style.display = 'block';
-        bringToFront(windowId);
+        window.style.zIndex = getNextZIndex();
+        
+        // Populate content for specific windows
+        if (windowId === 'projects') {
+            populateProjectsWindow();
+        } else if (windowId === 'skills') {
+            populateSkillsWindow();
+        }
+        
+        // Add to taskbar
         updateTaskbar(windowId);
     }
 }
@@ -491,12 +713,26 @@ function minimizeWindow(windowId) {
 function maximizeWindow(windowId) {
     const window = document.getElementById(`${windowId}-window`);
     if (window) {
-        if (window.style.width === '100%') {
-            window.style.width = '800px';
-            window.style.height = '500px';
+        if (window.classList.contains('maximized')) {
+            // Restore
+            window.classList.remove('maximized');
+            window.style.width = '';
+            window.style.height = '';
+            window.style.top = '';
+            window.style.left = '';
+            window.style.transform = '';
+            window.style.borderRadius = '';
+            window.style.maxHeight = '';
         } else {
-            window.style.width = '100%';
-            window.style.height = '100%';
+            // Maximize
+            window.classList.add('maximized');
+            window.style.width = '100vw';
+            window.style.height = 'calc(100vh - 40px)';
+            window.style.top = '0';
+            window.style.left = '0';
+            window.style.transform = 'none';
+            window.style.borderRadius = '0';
+            window.style.maxHeight = 'none';
         }
     }
 }
@@ -553,51 +789,7 @@ function toggleStartMenu() {
     startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none';
 }
 
-// Matrix rain effect
-function triggerMatrixRain() {
-    const canvas = document.querySelector('.matrix-rain');
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const matrix = canvas.classList;
-    matrix.add('active');
-    
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    
-    const drops = [];
-    for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
-    }
-    
-    function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#0F0';
-        ctx.font = fontSize + 'px monospace';
-        
-        for (let i = 0; i < drops.length; i++) {
-            const text = characters[Math.floor(Math.random() * characters.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-    
-    const interval = setInterval(draw, 33);
-    
-    setTimeout(() => {
-        clearInterval(interval);
-        matrix.remove('active');
-    }, 5000);
-}
+
 
 // Auto boot functionality
 function autoBoot() {
@@ -630,8 +822,6 @@ function hideShutdownDialog() {
 }
 
 function triggerShutdown() {
-    triggerMatrixRain();
-    
     setTimeout(() => {
         document.getElementById('desktop').style.display = 'none';
         document.getElementById('splash-screen').style.display = 'flex';
@@ -1031,12 +1221,7 @@ function changeCursorStyle(style) {
     showNotification(`Cursor style changed to ${style}`);
 }
 
-function toggleMatrixRain(enabled) {
-    if (enabled) {
-        triggerMatrixRain();
-    }
-    showNotification(`Matrix rain ${enabled ? 'enabled' : 'disabled'}`);
-}
+
 
 function toggleAnimations(enabled) {
     document.body.style.setProperty('--enable-animations', enabled ? '1' : '0');
@@ -1135,51 +1320,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('message').value
             };
 
-            try {
-                // Send to backend endpoint from environment variable
-                const response = await fetch(process.env.CONTACT_FORM_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to send message');
-                }
-                
-                // Show success message
-                const successMessage = document.createElement('div');
-                successMessage.className = 'form-message success';
-                successMessage.textContent = 'Message sent successfully! I will get back to you soon.';
-                contactForm.insertBefore(successMessage, contactForm.firstChild);
-                
-                // Clear form
-                contactForm.reset();
-                
-                // Remove success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.remove();
-                }, 5000);
-                
-                // Log the message in terminal
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'form-message success';
+            successMessage.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                Message sent successfully! I will get back to you soon.
+            `;
+            contactForm.insertBefore(successMessage, contactForm.firstChild);
+            
+            // Clear form
+            contactForm.reset();
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 5000);
+            
+            // Log the message in terminal
+            const terminalOutput = document.getElementById('terminal-output');
+            if (terminalOutput) {
                 const output = document.createElement('div');
                 output.className = 'terminal-line';
-                output.textContent = `[+] New message received from ${formData.name} (${formData.email})`;
+                output.textContent = `[+] New message received from ${formData.name} (${formData.email}) - Subject: ${formData.subject}`;
                 terminalOutput.appendChild(output);
-                
-            } catch (error) {
-                // Show error message
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'form-message error';
-                errorMessage.textContent = 'Failed to send message. Please try again later.';
-                contactForm.insertBefore(errorMessage, contactForm.firstChild);
-                
-                // Remove error message after 5 seconds
-                setTimeout(() => {
-                    errorMessage.remove();
-                }, 5000);
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
             }
         });
     }
@@ -1191,42 +1356,170 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fileGrid) {
         fileGrid.innerHTML = `
             <div class="file-item" onclick="openFile('resume.pdf')">
-                <i class="fas fa-file-pdf" style="color: #ff0000;"></i>
-                <span>resume.pdf</span>
-                <small class="file-info">Google Drive</small>
+                <i class="fas fa-file-pdf" style="color: var(--kali-red);"></i>
+                <span>Resume</span>
+                <small class="file-info">PDF</small>
             </div>
-            <div class="file-item" onclick="openFile('projects.txt')">
-                <i class="fas fa-code"></i>
-                <span>projects.txt</span>
+            <div class="file-item" onclick="openWindow('projects')">
+                <i class="fas fa-code" style="color: var(--kali-orange);"></i>
+                <span>Projects</span>
             </div>
-            <div class="file-item" onclick="openFile('skills.txt')">
-                <i class="fas fa-brain"></i>
-                <span>skills.txt</span>
+            <div class="file-item" onclick="openWindow('skills')">
+                <i class="fas fa-brain" style="color: var(--kali-cyan);"></i>
+                <span>Skills</span>
             </div>
-            <div class="file-item" onclick="openFile('education.txt')">
-                <i class="fas fa-graduation-cap"></i>
-                <span>education.txt</span>
+            <div class="file-item" onclick="openWindow('contact-form')">
+                <i class="fas fa-envelope" style="color: var(--kali-pink);"></i>
+                <span>Contact</span>
             </div>
-            <div class="file-item" onclick="openFile('certifications.txt')">
-                <i class="fas fa-certificate"></i>
-                <span>certifications.txt</span>
+            <div class="file-item" onclick="openWindow('terminal')">
+                <i class="fas fa-terminal" style="color: var(--kali-green);"></i>
+                <span>Terminal</span>
             </div>
-            <div class="file-item" onclick="openFile('achievements.txt')">
-                <i class="fas fa-trophy"></i>
-                <span>achievements.txt</span>
+            <div class="file-item" onclick="openWindow('monitor')">
+                <i class="fas fa-chart-line" style="color: var(--kali-yellow);"></i>
+                <span>Monitor</span>
             </div>
-            <div class="file-item" onclick="openFile('contact.txt')">
-                <i class="fas fa-address-card"></i>
-                <span>contact.txt</span>
+            <div class="file-item" onclick="openWindow('settings')">
+                <i class="fas fa-cog" style="color: var(--kali-blue);"></i>
+                <span>Settings</span>
             </div>
             <div class="file-item" onclick="openFile('about.txt')">
-                <i class="fas fa-user"></i>
-                <span>about.txt</span>
+                <i class="fas fa-user" style="color: var(--kali-orange);"></i>
+                <span>About Me</span>
+            </div>
+            <div class="file-item" onclick="openFile('experience.txt')">
+                <i class="fas fa-briefcase" style="color: var(--kali-purple);"></i>
+                <span>Experience</span>
+            </div>
+            <div class="file-item" onclick="openFile('education.txt')">
+                <i class="fas fa-graduation-cap" style="color: var(--kali-cyan);"></i>
+                <span>Education</span>
+            </div>
+            <div class="file-item" onclick="openFile('certifications.txt')">
+                <i class="fas fa-certificate" style="color: var(--kali-yellow);"></i>
+                <span>Certifications</span>
+            </div>
+            <div class="file-item" onclick="openFile('achievements.txt')">
+                <i class="fas fa-trophy" style="color: var(--kali-orange);"></i>
+                <span>Achievements</span>
             </div>
             <div class="file-item" onclick="openFile('languages.txt')">
-                <i class="fas fa-language"></i>
-                <span>languages.txt</span>
+                <i class="fas fa-language" style="color: var(--kali-pink);"></i>
+                <span>Languages</span>
+            </div>
+            <div class="file-item" onclick="openFile('github.txt')">
+                <i class="fab fa-github" style="color: var(--kali-purple);"></i>
+                <span>GitHub</span>
+            </div>
+            <div class="file-item" onclick="openFile('linkedin.txt')">
+                <i class="fab fa-linkedin" style="color: var(--kali-blue);"></i>
+                <span>LinkedIn</span>
             </div>
         `;
     }
-}); 
+});
+
+// Function to populate projects window
+function populateProjectsWindow() {
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) return;
+
+    projectsGrid.innerHTML = portfolioData.projects.map(project => `
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="project-title">${project.name}</h3>
+                ${project.status ? `<span class="project-status">${project.status}</span>` : ''}
+            </div>
+            <p class="project-description">${project.description}</p>
+            <div class="project-tech">
+                ${project.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+            </div>
+            <ul class="project-features">
+                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+            <div class="project-links">
+                ${project.github ? `<a href="${project.github}" target="_blank" class="project-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a>` : ''}
+                ${project.live ? `<a href="${project.live}" target="_blank" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+// Function to populate skills window
+function populateSkillsWindow() {
+    const skillsGrid = document.querySelector('.skills-grid');
+    if (!skillsGrid) return;
+
+    const skillCategories = [
+        {
+            name: 'Programming Languages',
+            icon: 'fas fa-code',
+            skills: portfolioData.skills.programming,
+            class: 'programming'
+        },
+        {
+            name: 'Cybersecurity',
+            icon: 'fas fa-shield-alt',
+            skills: portfolioData.skills.cybersecurity,
+            class: 'cybersecurity'
+        },
+        {
+            name: 'Web Development',
+            icon: 'fas fa-globe',
+            skills: [...portfolioData.skills.web.frontend, ...portfolioData.skills.web.backend, ...portfolioData.skills.web.fullstack],
+            class: 'web'
+        },
+        {
+            name: 'Cloud Computing',
+            icon: 'fas fa-cloud',
+            skills: portfolioData.skills.cloud,
+            class: 'cloud'
+        },
+        {
+            name: 'Mobile Development',
+            icon: 'fas fa-mobile-alt',
+            skills: portfolioData.skills.app,
+            class: 'mobile'
+        },
+        {
+            name: 'Database',
+            icon: 'fas fa-database',
+            skills: portfolioData.skills.database,
+            class: 'database'
+        },
+        {
+            name: 'DevOps',
+            icon: 'fas fa-cogs',
+            skills: portfolioData.skills.devops,
+            class: 'devops'
+        },
+        {
+            name: 'Tools',
+            icon: 'fas fa-tools',
+            skills: portfolioData.skills.tools,
+            class: 'tools'
+        }
+    ];
+
+    skillsGrid.innerHTML = skillCategories.map(category => `
+        <div class="skill-category ${category.class}">
+            <div class="skill-header">
+                <i class="${category.icon}"></i>
+                <span>${category.name}</span>
+            </div>
+            <div class="skill-list">
+                ${category.skills.map(skill => `<span class="skill-item">${skill}</span>`).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+ 
