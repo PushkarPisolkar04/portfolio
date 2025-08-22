@@ -12,7 +12,7 @@ const portfolioData = {
         github: "https://github.com/PushkarPisolkar04",
         linkedin: "https://linkedin.com/in/pushkar-pisolkar",
         portfolio: "https://whois-pushkar.vercel.app",
-        resume: "https://drive.google.com/file/d/1FD_pJa3E8X-meGM50-aZlfoVR5gheRKA/view?usp=sharing"
+        resume: "https://drive.google.com/file/d/1H0396vYliUi_zuVjAwCTk7CK6Un1l_E4/view?usp=sharing"
     },
 
     about: {
