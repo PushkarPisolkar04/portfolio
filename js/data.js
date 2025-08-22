@@ -12,7 +12,7 @@ const portfolioData = {
         github: "https://github.com/PushkarPisolkar04",
         linkedin: "https://linkedin.com/in/pushkar-pisolkar",
         portfolio: "https://whois-pushkar.vercel.app",
-        resume: "https://drive.google.com/file/d/1yZ-gvYeAM3YfvQNZUKa1IddPL0lv7lMJ/view?usp=sharing"
+        resume: "https://drive.google.com/file/d/1FD_pJa3E8X-meGM50-aZlfoVR5gheRKA/view?usp=sharing"
     },
 
     about: {
@@ -53,7 +53,7 @@ const portfolioData = {
             institution: "School of Scholars, Akola",
             board: "CBSE",
             year: "2020",
-            percentage: "97%",
+            percentage: "95.6%",
             achievement: "100/100 in Mathematics"
         }
     ],
